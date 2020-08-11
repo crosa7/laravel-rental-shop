@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h1 class="text-red-400">Hello World</h1>
+        <div class="border-b border-gray-400 p-6 rounded bg-white shadow">
+            <h1>This is the header</h1>
+        </div>
     </div>
 </template>
 
@@ -10,8 +12,6 @@
 
     @Component
     export default class App extends Vue {
-        mounted() {
-            console.log('Component mounted.')
-        }
+
     }
 </script>

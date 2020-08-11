@@ -11,11 +11,11 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
-    @section('main')
-    @endsection
         <div id="app">
-            <h2 class="text-red-800">sadasdasdasd</h2>
-            @yield('main')
+            <app></app>
+            <div>
+                @yield('main')
+            </div>
         </div>
     </body>
 </html>
