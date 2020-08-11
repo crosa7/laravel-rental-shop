@@ -18055,6 +18055,27 @@ body {
   font-weight: 400;
 }
 
+.btn-primary {
+  --bg-opacity: 1;
+  background-color: #fbd38d;
+  background-color: rgba(251, 211, 141, var(--bg-opacity));
+  padding: 0.5rem;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  transition-duration: 200ms;
+}
+
+.btn-primary:hover {
+  --bg-opacity: 1;
+  background-color: #f6ad55;
+  background-color: rgba(246, 173, 85, var(--bg-opacity));
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

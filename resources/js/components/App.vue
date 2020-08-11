@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="border-b border-gray-400 p-6 rounded bg-white shadow">
-            <h1>This is the header</h1>
+            <h1>This is the header //TODO add pixel licence</h1>
         </div>
     </div>
 </template>
