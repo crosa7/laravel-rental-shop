@@ -14,7 +14,7 @@
             <h4 class="text-2xl text-right">20,50€</h4>
             <span class="text-right text-gray-400 text-sm flex-1">For 3 days</span>
             <div class="text-right mt-5 md:mt-0">
-                <input class="w-1/4 border mb-1 text-center rounded" value="1" min="1" type="number">
+                <input class="w-1/4 border-2 mb-1 text-center rounded" value="1" min="1" type="number">
             </div>
             <button class="btn-primary">Add to cart</button>
         </div>

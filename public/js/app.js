@@ -20322,8 +20322,10 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "m-auto md:w-1/2 md:pr-10" },
+        { staticClass: "md:m-auto md:w-1/2 md:pr-10" },
         [
+          _vm._m(0),
+          _vm._v(" "),
           _c("product-tile"),
           _vm._v(" "),
           _c("product-tile"),
@@ -20350,7 +20352,77 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "flex flex-col md:flex-row mb-5 md:border md:border-4 bg-white md:rounded md:shadow p-4 justify-between md:sticky md:top-0"
+      },
+      [
+        _c("div", { staticClass: "flex items-end" }, [
+          _c("label", { staticClass: "block" }, [
+            _c("span", { staticClass: "text-orange-300" }, [
+              _vm._v("Pick-up date:")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "block border-2 rounded p-1 h-10",
+              attrs: { type: "date", value: "2017-06-01" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("select", { staticClass: "border-2 rounded p-1 ml-2 h-10" }, [
+              _c("option", [_vm._v("10:00")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("12:00")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("15:00")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("18:00")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex items-end mt-2 md:mt-0" }, [
+          _c("label", { staticClass: "block" }, [
+            _c("span", { staticClass: "text-orange-300" }, [
+              _vm._v("Return date:")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "block border-2 rounded p-1 h-10",
+              attrs: { type: "date", value: "2017-06-02" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("select", { staticClass: "border-2 rounded p-1 ml-2 h-10" }, [
+              _c("option", [_vm._v("10:00")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("12:00")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("15:00")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("18:00")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex items-center mt-2 md:mt-0" }, [
+          _c("button", { staticClass: "btn-primary md:w-20" }, [
+            _vm._v("Search")
+          ])
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -20436,7 +20508,7 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "text-right mt-5 md:mt-0" }, [
               _c("input", {
-                staticClass: "w-1/4 border mb-1 text-center rounded",
+                staticClass: "w-1/4 border-2 mb-1 text-center rounded",
                 attrs: { value: "1", min: "1", type: "number" }
               })
             ]),
