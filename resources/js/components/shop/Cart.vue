@@ -49,7 +49,7 @@
                 <h4 class="text-lg text-gray-600 font-bold">Pay on pick up:</h4>
                 <h4 class="text-lg font-bold">200,60€</h4>
             </div>
-            <button v-if="hasCheckoutButton" class="btn-primary mt-5">Proceed to checkout</button>
+            <button v-if="hasCheckoutButton" class="btn-primary mt-5" @click="goToCheckout()">Proceed to checkout</button>
         </div>
     </div>
 </template>
@@ -67,6 +67,10 @@
 
         protected toggleCart() {
             this.isCartOpen = !this.isCartOpen;
+        }
+
+        protected goToCheckout() {
+            window.location.assign('/checkout');
         }
     }
 </script>

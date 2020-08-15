@@ -7,6 +7,7 @@ export class CheckoutForm {
     private address: string;
     private phone: string;
     private info: string;
+    private paymentMethod: string;
 
     constructor(
         email: string = '',
@@ -17,6 +18,7 @@ export class CheckoutForm {
         address: string = '',
         phone: string = '',
         info: string = '',
+        paymentMethod: string = '',
 
     ) {
         this.email = email;
@@ -27,5 +29,6 @@ export class CheckoutForm {
         this.address = address;
         this.phone = phone;
         this.info = info;
+        this.paymentMethod = paymentMethod;
     }
 }

@@ -1,68 +1,114 @@
 <template>
     <div class="mt-10 flex flex-col md:flex-row justify-between p-2">
         <cart :has-checkout-button="false"></cart>
-        <div class="md:m-auto md:w-1/3 flex flex-col md:flex-row mb-5 md:border md:border-4 bg-white md:rounded md:shadow p-6">
+        <div
+            class="md:m-auto md:w-1/2 flex flex-col md:flex-row mb-5 md:border md:border-4 bg-white md:rounded md:shadow p-6">
             <form class="w-full" name="checkout_form" method="post" @submit.prevent="submit">
                 <div class="w-full">
-                    <div class="input-group">
-                        <label class="block">
-                            Email:
-                            <input class="block w-full" v-model="checkoutForm.email" @keydown="clearError('email')" id="email" type="email">
-                            <span v-if="errors.email" class="text-red-400">{{ errors.email[0] }}</span>
-                        </label>
-                    </div>
-                    <div class="input-group">
-                        <label class="block">
-                            Name:
-                            <input class="block w-full" v-model="checkoutForm.name" @keydown="clearError('name')" id="name" type="text">
+                    <div class="md:flex">
+                        <label class="mb-5 block md:w-1/2">
+                            <span class="input-label">Name:*</span>
+                            <input class="block w-full" v-model="checkoutForm.name" @keydown="clearError('name')"
+                                   id="name" type="text">
                             <span v-if="errors.name" class="text-red-400">{{ errors.name[0] }}</span>
                         </label>
-                    </div>
-                    <div class="input-group">
-                        <label class="block">
-                            Date of birth:
-                            <input class="block w-full" v-model="checkoutForm.dateOfBirth" @change="clearError('dateOfBirth')" id="dateOfBirth" type="date">
-                            <span v-if="errors.dateOfBirth" class="text-red-400">{{ errors.dateOfBirth[0] }}</span>
-                        </label>
-                    </div>
-                    <div class="input-group">
-                        <label class="block">
-                            Country:
-                            <input class="block w-full" v-model="checkoutForm.country" @keydown="clearError('country')" id="country" type="text">
+                        <label class="mb-5 block md:w-1/2 md:ml-4">
+                            <span class="input-label">Country:*</span>
+                            <input class="block w-full" v-model="checkoutForm.country" @keydown="clearError('country')"
+                                   id="country" type="text">
                             <span v-if="errors.country" class="text-red-400">{{ errors.country[0] }}</span>
                         </label>
                     </div>
-                    <div class="input-group">
-                        <label class="block">
-                            Postal Code:
-                            <input class="block w-full" v-model="checkoutForm.zipCode" @keydown="clearError('zipCode')" id="zipCode" type="text">
-                            <span v-if="errors.zipCode" class="text-red-400">{{ errors.zipCode[0] }}</span>
+                    <div class="md:flex">
+                        <label class="mb-5 block md:w-1/2">
+                            <span class="input-label">Email:*</span>
+                            <input class="border-2 block w-full" v-model="checkoutForm.email"
+                                   @keydown="clearError('email')"
+                                   id="email" type="email">
+                            <span v-if="errors.email" class="text-red-400">{{ errors.email[0] }}</span>
                         </label>
-                    </div>
-                    <div class="input-group">
-                        <label class="block">
-                            Home address:
-                            <input class="block w-full" v-model="checkoutForm.address" @keydown="clearError('address')" id="address" type="text">
+                        <label class="mb-5 block md:w-1/2 md:ml-4">
+                            <span class="input-label">Home address:</span>
+                            <input class="block w-full" v-model="checkoutForm.address" @keydown="clearError('address')"
+                                   id="address" type="text">
                             <span v-if="errors.address" class="text-red-400">{{ errors.address[0] }}</span>
                         </label>
                     </div>
-                    <div class="input-group">
-                        <label class="block">
-                            Phone number:
-                            <input class="block w-full" v-model="checkoutForm.phone" @keydown="clearError('phone')" id="phone" type="text">
+                    <div class="md:flex">
+                        <label class="mb-5 block md:w-1/2">
+                            <span class="input-label">Phone number:*</span>
+                            <input class="block w-full" v-model="checkoutForm.phone" @keydown="clearError('phone')"
+                                   id="phone" type="text">
                             <span v-if="errors.phone" class="text-red-400">{{ errors.phone[0] }}</span>
                         </label>
-                    </div>
-                    <div class="input-group">
-                        <label class="block">
-                            Additional Info:
-                            <textarea class="block w-full" v-model="checkoutForm.info" type="text"></textarea>
+                        <label class="mb-5 block md:w-1/2 md:ml-4">
+                            <span class="input-label">Postal Code:</span>
+                            <input class="block w-full" v-model="checkoutForm.zipCode" @keydown="clearError('zipCode')"
+                                   id="zipCode" type="text">
+                            <span v-if="errors.zipCode" class="text-red-400">{{ errors.zipCode[0] }}</span>
                         </label>
                     </div>
+                    <div class="mb-5">
+                        <label class="block">
+                            <span class="input-label">Date of birth:</span>
+                            <input class="block w-full" v-model="checkoutForm.dateOfBirth"
+                                   @change="clearError('dateOfBirth')" id="dateOfBirth" type="date">
+                            <span v-if="errors.dateOfBirth" class="text-red-400">{{ errors.dateOfBirth[0] }}</span>
+                        </label>
+                    </div>
+                    <div class="mb-5">
+                        <label class="block">
+                            <span class="input-label">Additional Info:*</span>
+                            <div class="border-2 p-4 rounded">
+                                <div v-for="count in 5" class="flex flex-col md:flex-row md:w-1/2 justify-between mb-2">
+                                    <label class="block mb-2 md:mb-0 w-full">
+                                        <span>Gender:</span>
+                                        <select class="border-2 rounded p-1 block h-10 w-full">
+                                            <option disabled selected>Select one</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                        </select>
+                                    </label>
+                                    <label class="block w-full md:ml-4">
+                                        <span>Height(cm):</span>
+                                        <input class="block h-10 w-full" type="text">
+                                    </label>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="mb-5">
+                        <label>
+                            <span class="input-label">Payment Method:*</span>
+                            <div>
+                                <div class="border-2 rounded p-5 bg-gray-200">
+                                    <label>
+                                        <input type="radio" name="paymentRadio" value="paypal"
+                                               v-model="checkoutForm.paymentMethod">
+                                        <span>
+                                            <i class="fa fa-cc-paypal mr-1"></i>
+                                            Paypal
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="border-2 rounded p-5 bg-gray-200 mt-2">
+                                    <label>
+                                        <input type="radio" name="paymentRadio" value="visa"
+                                               v-model="checkoutForm.paymentMethod">
+                                        <span class="">
+                                            <i class="fa fa-cc-visa mr-1"></i>
+                                            Credit Card
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </label>
+                        <span v-if="errors.paymentMethod" class="text-red-400">{{ errors.paymentMethod[0] }}</span>
+                    </div>
 
-                    <div class="flex justify-end">
-                        <button class="btn-secondary mr-4" type="button" @click="resetForm()">Reset</button>
-                        <button class="btn-primary" type="submit">Confirm and Pay</button>
+                    <div class="flex justify-between">
+                        <button class="btn-secondary w-1/2 mr-4" type="button" @click="resetForm()">Cancel</button>
+                        <button class="btn-primary w-1/2" type="submit">Confirm and Pay</button>
                     </div>
                 </div>
             </form>
@@ -74,7 +120,7 @@
     import Vue from 'vue'
     import Component from 'vue-class-component'
     import Cart from "./Cart.vue";
-    import { CheckoutForm } from "../../models/CheckoutForm";
+    import {CheckoutForm} from "../../models/CheckoutForm";
 
     @Component({
         components: {
@@ -84,6 +130,8 @@
     export default class CheckoutPage extends Vue {
 
         protected isCartOpen: boolean = true;
+
+        protected requiredFields: string[] = ['email', 'name', 'country', 'phone', 'paymentMethod'];
 
         protected toggleCart() {
             this.isCartOpen = !this.isCartOpen;
@@ -100,13 +148,15 @@
                 return;
             }
 
+            // Do something
+
             this.checkoutForm = new CheckoutForm();
         }
 
         protected validateData() {
             const errors = {};
             Object.keys(this.checkoutForm).forEach((key) => {
-                if ((this.checkoutForm as any)[key] === '') {
+                if ((this.checkoutForm as any)[key] === '' && this.requiredFields.includes(key)) {
                     (errors as any)[key] = ['This field cannot be empty'];
                 }
             });
@@ -115,7 +165,7 @@
         }
 
         protected clearError(fieldName: string) {
-            (this.errors as any)['_' + fieldName] = [];
+            (this.errors as any)[fieldName] = [];
         }
 
         protected resetForm() {
@@ -125,7 +175,7 @@
     }
 </script>
 <style>
-    .input-group {
-        @apply mb-5
+    .input-label {
+        @apply font-bold;
     }
 </style>
