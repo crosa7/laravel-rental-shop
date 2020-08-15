@@ -18041,6 +18041,35 @@ body {
   background-color: rgba(246, 173, 85, var(--bg-opacity));
 }
 
+.btn-secondary {
+  --bg-opacity: 1;
+  background-color: #cbd5e0;
+  background-color: rgba(203, 213, 224, var(--bg-opacity));
+  padding: 0.5rem;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  transition-duration: 200ms;
+}
+
+.btn-secondary:hover {
+  --bg-opacity: 1;
+  background-color: #a0aec0;
+  background-color: rgba(160, 174, 192, var(--bg-opacity));
+}
+
+input[type=date] {
+  border-width: 2px;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  height: 2.5rem;
+}
+
+input[type=text], input[type=email], textarea {
+  border-width: 2px;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   opacity: 1;

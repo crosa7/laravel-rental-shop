@@ -6,7 +6,7 @@
                 <div class="flex items-end">
                     <label class="block">
                         <span class="text-orange-300">Pick-up date:</span>
-                        <input class="block border-2 rounded p-1 h-10" type="date" value="2017-06-01">
+                        <input class="block input-date" type="date" value="2017-06-01">
                     </label>
                     <div>
                         <select class="border-2 rounded p-1 ml-2 h-10">
@@ -20,7 +20,7 @@
                 <div class="flex items-end mt-2 md:mt-0">
                     <label class="block">
                         <span class="text-orange-300">Return date:</span>
-                        <input class="block border-2 rounded p-1 h-10" type="date" value="2017-06-02">
+                        <input class="block input-date" type="date" value="2017-06-02">
                     </label>
                     <div>
                         <select class="border-2 rounded p-1 ml-2 h-10">

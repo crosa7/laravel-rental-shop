@@ -49,17 +49,19 @@
                 <h4 class="text-lg text-gray-600 font-bold">Pay on pick up:</h4>
                 <h4 class="text-lg font-bold">200,60€</h4>
             </div>
-            <button class="btn-primary mt-5">Proceed to checkout</button>
+            <button v-if="hasCheckoutButton" class="btn-primary mt-5">Proceed to checkout</button>
         </div>
     </div>
 </template>
 
 <script lang="ts">
     import Vue from 'vue'
-    import Component from 'vue-class-component'
+    import { Component, Prop } from 'vue-property-decorator'
 
     @Component
     export default class Cart extends Vue {
+        @Prop({ type: Boolean, default: true })
+        protected hasCheckoutButton!: boolean;
 
         protected isCartOpen: boolean = true;
 
