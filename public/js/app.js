@@ -20423,7 +20423,7 @@ var CheckoutPage = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.esm.js");
+/* harmony import */ var vue_property_decorator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-property-decorator */ "./node_modules/vue-property-decorator/lib/vue-property-decorator.js");
 /* harmony import */ var _ProductTile_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProductTile.vue */ "./resources/js/components/shop/ProductTile.vue");
 /* harmony import */ var _Cart_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Cart.vue */ "./resources/js/components/shop/Cart.vue");
 var __extends = (undefined && undefined.__extends) || (function () {
@@ -20459,8 +20459,11 @@ var ProductListPage = /** @class */ (function (_super) {
     ProductListPage.prototype.toggleCart = function () {
         this.isCartOpen = !this.isCartOpen;
     };
+    __decorate([
+        Object(vue_property_decorator__WEBPACK_IMPORTED_MODULE_1__["Prop"])({ required: true })
+    ], ProductListPage.prototype, "products", void 0);
     ProductListPage = __decorate([
-        Object(vue_class_component__WEBPACK_IMPORTED_MODULE_1__["default"])({
+        Object(vue_property_decorator__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             components: {
                 Cart: _Cart_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
                 ProductTile: _ProductTile_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -20484,7 +20487,7 @@ var ProductListPage = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.esm.js");
+/* harmony import */ var vue_property_decorator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-property-decorator */ "./node_modules/vue-property-decorator/lib/vue-property-decorator.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -20511,8 +20514,11 @@ var ProductTile = /** @class */ (function (_super) {
     function ProductTile() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    __decorate([
+        Object(vue_property_decorator__WEBPACK_IMPORTED_MODULE_1__["Prop"])({ required: true, type: Object })
+    ], ProductTile.prototype, "product", void 0);
     ProductTile = __decorate([
-        vue_class_component__WEBPACK_IMPORTED_MODULE_1__["default"]
+        vue_property_decorator__WEBPACK_IMPORTED_MODULE_1__["Component"]
     ], ProductTile);
     return ProductTile;
 }(vue__WEBPACK_IMPORTED_MODULE_0__["default"]));
@@ -21671,27 +21677,14 @@ var render = function() {
         [
           _vm._m(0),
           _vm._v(" "),
-          _c("product-tile"),
-          _vm._v(" "),
-          _c("product-tile"),
-          _vm._v(" "),
-          _c("product-tile"),
-          _vm._v(" "),
-          _c("product-tile"),
-          _vm._v(" "),
-          _c("product-tile"),
-          _vm._v(" "),
-          _c("product-tile"),
-          _vm._v(" "),
-          _c("product-tile"),
-          _vm._v(" "),
-          _c("product-tile"),
-          _vm._v(" "),
-          _c("product-tile"),
-          _vm._v(" "),
-          _c("product-tile")
+          _vm._l(_vm.products, function(product, index) {
+            return _c("product-tile", {
+              key: index,
+              attrs: { product: product }
+            })
+          })
         ],
-        1
+        2
       )
     ],
     1
@@ -21789,82 +21782,80 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass:
+        "flex flex-col md:flex-row mb-5 md:border md:border-4 bg-white md:rounded md:shadow p-4 justify-between"
+    },
+    [
+      _c("img", {
+        attrs: {
+          src:
+            "https://www.bikeinn.com/f/13646/136466095/msc-fat-bike-booty-r-26.jpg",
+          width: "200px",
+          height: "200px"
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "md:w-1/3" }, [
+        _c("h4", { staticClass: "mb-1 font-bold text-2xl text-orange-300" }, [
+          _vm._v(_vm._s(_vm.product.name))
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex flex-col mt-4" }, [
+          _c("h4", { staticClass: "text-md font-bold text-orange-300" }, [
+            _vm._v("Description:")
+          ]),
+          _vm._v(" "),
+          _c("h4", { staticClass: "text-sm text-gray-600" }, [
+            _vm._v(_vm._s(_vm.product.description))
+          ]),
+          _vm._v(" "),
+          _c("h4", { staticClass: "text-sm text-gray-600" }, [
+            _vm._v("Includes third party insurance and lock")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "md:w-1/4 mt-10 md:mt-0 flex flex-col md:border md:border-4 md:bg-white md:p-4 md:bg-orange-200"
+        },
+        [
+          _c("h4", { staticClass: "text-2xl text-right" }, [
+            _vm._v(_vm._s(_vm.product.price) + "€")
+          ]),
+          _vm._v(" "),
+          _c(
+            "span",
+            { staticClass: "text-right text-gray-400 text-sm flex-1" },
+            [_vm._v("For 3 days")]
+          ),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("button", { staticClass: "btn-primary" }, [_vm._v("Add to cart")])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "flex flex-col md:flex-row mb-5 md:border md:border-4 bg-white md:rounded md:shadow p-4 justify-between"
-      },
-      [
-        _c("img", {
-          attrs: {
-            src:
-              "https://www.bikeinn.com/f/13646/136466095/msc-fat-bike-booty-r-26.jpg",
-            width: "200px",
-            height: "200px"
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "md:w-1/3" }, [
-          _c("h4", { staticClass: "mb-1 font-bold text-2xl text-orange-300" }, [
-            _vm._v("Ageece Alfa")
-          ]),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col mt-4" }, [
-            _c("h4", { staticClass: "text-md font-bold text-orange-300" }, [
-              _vm._v("Description:")
-            ]),
-            _vm._v(" "),
-            _c("h4", { staticClass: "text-sm text-gray-600" }, [
-              _vm._v("Bike with 27 gears, wheel of size 27")
-            ]),
-            _vm._v(" "),
-            _c("h4", { staticClass: "text-sm text-gray-600" }, [
-              _vm._v("Includes third party insurance and lock")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "md:w-1/4 mt-10 md:mt-0 flex flex-col md:border md:border-4 md:bg-white md:p-4 md:bg-orange-200"
-          },
-          [
-            _c("h4", { staticClass: "text-2xl text-right" }, [
-              _vm._v("20,50€")
-            ]),
-            _vm._v(" "),
-            _c(
-              "span",
-              { staticClass: "text-right text-gray-400 text-sm flex-1" },
-              [_vm._v("For 3 days")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "text-right mt-5 md:mt-0" }, [
-              _c("input", {
-                staticClass: "w-1/4 border-2 mb-1 text-center rounded",
-                attrs: { value: "1", min: "1", type: "number" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("button", { staticClass: "btn-primary" }, [
-              _vm._v("Add to cart")
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "text-right mt-5 md:mt-0" }, [
+      _c("input", {
+        staticClass: "w-1/4 border-2 mb-1 text-center rounded",
+        attrs: { value: "1", min: "1", type: "number" }
+      })
+    ])
   }
 ]
 render._withStripped = true

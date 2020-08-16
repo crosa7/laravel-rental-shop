@@ -35,25 +35,22 @@
                     <button class="btn-primary md:w-20">Search</button>
                 </div>
             </div>
-            <product-tile></product-tile>
-            <product-tile></product-tile>
-            <product-tile></product-tile>
-            <product-tile></product-tile>
-            <product-tile></product-tile>
-            <product-tile></product-tile>
-            <product-tile></product-tile>
-            <product-tile></product-tile>
-            <product-tile></product-tile>
-            <product-tile></product-tile>
+            <product-tile
+                v-for="(product, index) in products"
+                :key="index"
+                :product="product"
+            >
+            </product-tile>
         </div>
     </div>
 </template>
 
 <script lang="ts">
     import Vue from 'vue'
-    import Component from 'vue-class-component'
-    import ProductTile from "./ProductTile.vue";
-    import Cart from "./Cart.vue";
+    import { Component, Prop } from 'vue-property-decorator'
+    import ProductTile from './ProductTile.vue';
+    import Cart from './Cart.vue';
+    import { ProductInterface } from './shop.interface';
 
     @Component({
         components: {
@@ -62,6 +59,8 @@
         }
     })
     export default class ProductListPage extends Vue {
+        @Prop({ required: true })
+        protected products!: ProductInterface[];
 
         protected isCartOpen: boolean = true;
 
