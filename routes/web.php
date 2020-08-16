@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('list');
-});
+Route::get('/', 'ProductPageController@index');
 
 Route::get('/checkout', function () {
     return view('checkout');
