@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'ProductPageController@index');
+Route::get('/ajax/product-list', 'Ajax\ProductListAjaxController@getByDates');
 
 Route::get('/checkout', function () {
     return view('checkout');
