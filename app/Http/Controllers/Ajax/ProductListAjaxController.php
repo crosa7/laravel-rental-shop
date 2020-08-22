@@ -3,15 +3,13 @@
 namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
-use App\Season;
+use App\Http\Factories\ProductFactory;
+use App\Http\Repositories\ProductRepository\Models\ProductFilterModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ProductListAjaxController extends Controller
 {
-    private const JUNE = '06';
-    private const AUGUST = '08';
     /**
      * @param \Illuminate\Http\Request $request
      *
@@ -21,19 +19,11 @@ class ProductListAjaxController extends Controller
     {
         $startDate = date('m', strtotime($request->query('start')));
 
-        $seasonKey = 'low';
-        if ($startDate >= self::JUNE && $startDate <= self::AUGUST) {
-            $seasonKey = 'high';
-        }
+        /** @var \App\Http\Repositories\ProductRepository\ProductsRepository $productsRepository */
+        $productsRepository = $this
+            ->getFactory(ProductFactory::class)
+            ->getProductsRepository();
 
-        $season = Season::where('key', '=', $seasonKey)->first();
-
-        $products = DB::table('products')
-            ->leftJoin('price_products', 'products.id', '=', 'price_products.product_id')
-            ->where('season_id', '=', $season['id'])
-            ->where('number_of_days', '=', '1')
-            ->get();
-
-        return new JsonResponse($products);
+        return new JsonResponse($productsRepository->getProductsByDate(new ProductFilterModel($startDate)));
     }
 }

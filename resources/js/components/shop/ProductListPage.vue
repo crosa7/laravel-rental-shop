@@ -78,6 +78,10 @@
         }
 
         protected async getProductListByDate() {
+            if (this.startDate > this.endDate) {
+                // TODO disable dates that are before start date when new date picker is implemented
+                console.log('start date cant be lower than end date')
+            }
             const response = await axios.get(`/ajax/product-list?start=${this.startDate}&end=${this.endDate}`);
             this.products = response.data;
         }

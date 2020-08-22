@@ -20511,7 +20511,12 @@ var ProductListPage = /** @class */ (function (_super) {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("/ajax/product-list?start=" + this.startDate + "&end=" + this.endDate)];
+                    case 0:
+                        if (this.startDate > this.endDate) {
+                            // TODO disable dates that are before start date when new date picker is implemented
+                            console.log('start date cant be lower than end date');
+                        }
+                        return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("/ajax/product-list?start=" + this.startDate + "&end=" + this.endDate)];
                     case 1:
                         response = _a.sent();
                         this.products = response.data;
@@ -20985,7 +20990,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "border border-4 bg-white p-6 rounded md:fixed md:right-0 shadow md:w-1/5 md:mr-10 mb-5 md:mb-0"
+        "border border-4 bg-white p-6 rounded md:fixed md:right-0 md:shadow md:w-1/5 md:mr-10 mb-5 md:mb-0"
     },
     [
       _c("div", { staticClass: "flex mb-2" }, [

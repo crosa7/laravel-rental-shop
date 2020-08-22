@@ -1,5 +1,5 @@
 <template>
-    <div class="border border-4 bg-white p-6 rounded md:fixed md:right-0 shadow md:w-1/5 md:mr-10 mb-5 md:mb-0">
+    <div class="border border-4 bg-white p-6 rounded md:fixed md:right-0 md:shadow md:w-1/5 md:mr-10 mb-5 md:mb-0">
         <div class="flex mb-2">
             <h1 class="text-2xl font-bold text-gray-600 flex-1">Order Summary</h1>
             <button class="inline md:invisible" @click="toggleCart()">
