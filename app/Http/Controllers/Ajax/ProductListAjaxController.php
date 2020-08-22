@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
 use App\Http\Factories\ProductFactory;
-use App\Http\Repositories\ProductRepository\Models\ProductFilterModel;
+use App\Http\Repositories\Product\Models\ProductFilterModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -19,7 +19,7 @@ class ProductListAjaxController extends Controller
     {
         $startDate = date('m', strtotime($request->query('start')));
 
-        /** @var \App\Http\Repositories\ProductRepository\ProductsRepository $productsRepository */
+        /** @var \App\Http\Repositories\Product\ProductsRepository $productsRepository */
         $productsRepository = $this
             ->getFactory(ProductFactory::class)
             ->getProductsRepository();

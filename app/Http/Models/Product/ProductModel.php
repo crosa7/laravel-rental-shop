@@ -4,41 +4,61 @@
 namespace App\Http\Models\Product;
 
 
-class ProductModel
+use App\Http\Models\BaseModel;
+
+class ProductModel extends BaseModel
 {
+    private const ID = 'id';
     private const NAME = 'name';
     private const DESCRIPTION = 'description';
     private const PRICE = 'price';
+    private const QUANTITY = 'quantity';
 
-    private $propertyNames = [
+    protected $propertyNames = [
         self::NAME,
         self::DESCRIPTION,
         self::PRICE,
+        self::QUANTITY,
+        self::ID,
     ];
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $description;
+    protected $description;
 
     /**
      * @var float
      */
-    private $price;
+    protected $price;
+
+    /**
+     * @var int
+     */
+    protected $quantity;
+
+    /**
+     * @var int
+     */
+    protected $id;
 
     public function __construct(
         string $name = null,
         string $description = null,
-        float $price = null
+        float $price = null,
+        int $quantity = null,
+        int $id = null
     ) {
         $this->name = $name;
         $this->description = $description;
         $this->price = $price;
+        $this->quantity = $quantity;
+        $this->id = $id;
     }
 
     /**
@@ -51,10 +71,14 @@ class ProductModel
 
     /**
      * @param string $name
+     *
+     * @return \App\Http\Models\Product\ProductModel
      */
-    public function setName(string $name): void
+    public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -67,10 +91,14 @@ class ProductModel
 
     /**
      * @param string $description
+     *
+     * @return \App\Http\Models\Product\ProductModel
      */
-    public function setDescription(string $description): void
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -83,46 +111,53 @@ class ProductModel
 
     /**
      * @param float $price
-     */
-    public function setPrice(float $price): void
-    {
-        $this->price = $price;
-    }
-
-    /**
-     * @param array $data
      *
      * @return \App\Http\Models\Product\ProductModel
      */
-    public function fromArray(array $data): self
+    public function setPrice(float $price): self
     {
-        foreach ($data as $fieldName => $value) {
-            switch ($fieldName) {
-                case self::NAME:
-                    $this->setName($value);
-                    break;
-                case self::DESCRIPTION:
-                    $this->setDescription($value);
-                    break;
-                case self::PRICE:
-                    $this->setPrice($value);
-                    break;
-            }
-        }
+        $this->price = $price;
 
         return $this;
     }
 
     /**
-     * @return array
+     * @return int
      */
-    public function toArray(): array
+    public function getQuantity(): int
     {
-        $productArray = [];
-        foreach ($this->propertyNames as $propertyName) {
-            $productArray[$propertyName] = $this->$propertyName;
-        }
+        return $this->quantity;
+    }
 
-        return $productArray;
+    /**
+     * @param int $quantity
+     *
+     * @return \App\Http\Models\Product\ProductModel
+     */
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return \App\Http\Models\Product\ProductModel
+     */
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 }

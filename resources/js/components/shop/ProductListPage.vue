@@ -1,6 +1,6 @@
 <template>
     <div class="mt-10 flex flex-col md:flex-row justify-between p-2">
-        <cart></cart>
+        <cart :cart="cart"></cart>
         <div class="md:m-auto md:w-1/2 md:pr-10">
             <div class="flex flex-col md:flex-row mb-5 md:border md:border-4 bg-white md:rounded md:shadow p-4 justify-between md:sticky md:top-0">
                 <div class="flex items-end">
@@ -47,7 +47,7 @@
 
 <script lang="ts">
     import Vue from 'vue'
-    import { Component } from 'vue-property-decorator'
+    import { Component, Prop } from 'vue-property-decorator'
     import ProductTile from './ProductTile.vue';
     import Cart from './Cart.vue';
     import { ProductInterface } from './shop.interface';
@@ -61,6 +61,9 @@
         }
     })
     export default class ProductListPage extends Vue {
+        @Prop({ type: Object, default: null })
+        protected cart!: any;
+
         protected products: ProductInterface[] = [];
 
         protected startDate: string = getCurrentDate();

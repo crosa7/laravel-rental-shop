@@ -16,7 +16,7 @@
             <div class="text-right mt-5 md:mt-0">
                 <input class="w-1/4 border-2 mb-1 text-center rounded" value="1" min="1" type="number">
             </div>
-            <button class="btn-primary">Add to cart</button>
+            <button class="btn-primary" @click="addToCart">Add to cart</button>
         </div>
     </div>
 </template>
@@ -25,10 +25,15 @@
     import Vue from 'vue'
     import { Component, Prop } from 'vue-property-decorator'
     import { ProductInterface } from './shop.interface';
+    import axios from 'axios';
 
     @Component
     export default class ProductTile extends Vue {
         @Prop({ required: true, type: Object })
         protected product!: ProductInterface;
+
+        protected async addToCart() {
+            const response = await axios.post(`/ajax/cart/add-product`, this.product);
+        }
     }
 </script>

@@ -1,5 +1,5 @@
 @extends('base')
 
 @section('main')
-<product-list-page></product-list-page>
+<product-list-page :cart="{{ $cart }}"></product-list-page>
 @endsection

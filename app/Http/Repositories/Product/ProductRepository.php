@@ -1,20 +1,20 @@
 <?php
 
 
-namespace App\Http\Repositories\ProductRepository;
+namespace App\Http\Repositories\Product;
 
 
 use App\Http\Models\Product\ProductModel;
-use App\Http\Repositories\ProductRepository\Models\ProductFilterModel;
+use App\Http\Repositories\Product\Models\ProductFilterModel;
 use Illuminate\Support\Facades\DB;
 
-class ProductsRepository
+class ProductRepository
 {
     private const JUNE = '06';
     private const AUGUST = '08';
 
     /**
-     * @param \App\Http\Repositories\ProductRepository\Models\ProductFilterModel $productFilterModel
+     * @param \App\Http\Repositories\Product\Models\ProductFilterModel $productFilterModel
      *
      * @return \App\Http\Models\Product\ProductModel[]
      */

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Repositories\ProductRepository\Models;
+namespace App\Http\Repositories\Product\Models;
 
 
 class ProductFilterModel

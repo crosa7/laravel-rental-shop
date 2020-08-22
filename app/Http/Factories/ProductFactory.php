@@ -4,15 +4,15 @@
 namespace App\Http\Factories;
 
 
-use App\Http\Repositories\ProductRepository\ProductsRepository;
+use App\Http\Repositories\Product\ProductRepository;
 
 class ProductFactory
 {
     /**
-     * @return \App\Http\Repositories\ProductRepository\ProductsRepository
+     * @return \App\Http\Repositories\Product\ProductRepository
      */
-    public function getProductsRepository(): ProductsRepository
+    public function getProductsRepository(): ProductRepository
     {
-        return new ProductsRepository();
+        return new ProductRepository();
     }
 }

@@ -8,46 +8,46 @@
             </button>
         </div>
         <hr v-if="isCartOpen">
-        <div v-if="isCartOpen" class="flex flex-col mt-5">
+        <div v-if="isCartOpen && !isEmpty" class="flex flex-col mt-5">
             <h4 class="text-lg text-gray-600 font-bold">Items:</h4>
-            <div class="flex mb-1">
-                <h5 class="text-md w-1/12">3x</h5>
-                <h5 class="text-md flex-1">Ageece alfa</h5>
-                <h5 class="text-md text-right">60,50€</h5>
+            <div v-for="product in cart.products" class="flex mb-1">
+                <h5 class="text-md w-1/12">{{ product.quantity }}x</h5>
+                <h5 class="text-md flex-1">{{ product.name }}</h5>
+                <h5 class="text-md text-right">{{ product.price }}€</h5>
             </div>
 
-            <div class="flex mb-1">
-                <h5 class="text-md w-1/12">3x</h5>
-                <h5 class="text-md flex-1">Ageece alfa</h5>
-                <h5 class="text-md text-right">60,50€</h5>
-            </div>
-            <div class="flex mb-1">
-                <h5 class="text-md w-1/12">3x</h5>
-                <h5 class="text-md flex-1">Ageece alfa</h5>
-                <h5 class="text-md text-right">60,50€</h5>
-            </div>
-            <div class="flex mb-1">
-                <h5 class="text-md w-1/12">3x</h5>
-                <h5 class="text-md flex-1">Ageece alfa</h5>
-                <h5 class="text-md text-right">60,50€</h5>
-            </div>
-            <div class="flex mb-1">
-                <h5 class="text-md w-1/12">3x</h5>
-                <h5 class="text-md flex-1">Ageece alfa</h5>
-                <h5 class="text-md text-right">60,50€</h5>
-            </div>
+<!--            <div class="flex mb-1">-->
+<!--                <h5 class="text-md w-1/12">3x</h5>-->
+<!--                <h5 class="text-md flex-1">Ageece alfa</h5>-->
+<!--                <h5 class="text-md text-right">60,50€</h5>-->
+<!--            </div>-->
+<!--            <div class="flex mb-1">-->
+<!--                <h5 class="text-md w-1/12">3x</h5>-->
+<!--                <h5 class="text-md flex-1">Ageece alfa</h5>-->
+<!--                <h5 class="text-md text-right">60,50€</h5>-->
+<!--            </div>-->
+<!--            <div class="flex mb-1">-->
+<!--                <h5 class="text-md w-1/12">3x</h5>-->
+<!--                <h5 class="text-md flex-1">Ageece alfa</h5>-->
+<!--                <h5 class="text-md text-right">60,50€</h5>-->
+<!--            </div>-->
+<!--            <div class="flex mb-1">-->
+<!--                <h5 class="text-md w-1/12">3x</h5>-->
+<!--                <h5 class="text-md flex-1">Ageece alfa</h5>-->
+<!--                <h5 class="text-md text-right">60,50€</h5>-->
+<!--            </div>-->
             <hr class="mt-5">
             <div class="flex justify-between mt-5">
                 <h4 class="text-lg text-gray-600 font-bold">Subtotal:</h4>
-                <h4 class="text-lg font-bold">300,60€</h4>
+                <h4 class="text-lg font-bold">{{ cart.total }}€</h4>
             </div>
             <div class="flex justify-between mt-1 ml-2">
                 <h4 class="text-lg text-gray-600 font-bold">Pay now:</h4>
-                <h4 class="text-lg font-bold">100,60€</h4>
+                <h4 class="text-lg font-bold">{{ cart.toPay }}€</h4>
             </div>
             <div class="flex justify-between mt-1 ml-2">
                 <h4 class="text-lg text-gray-600 font-bold">Pay on pick up:</h4>
-                <h4 class="text-lg font-bold">200,60€</h4>
+                <h4 class="text-lg font-bold">{{ cart.toBePayed }}€</h4>
             </div>
             <button v-if="hasCheckoutButton" class="btn-primary mt-5" @click="goToCheckout()">Proceed to checkout</button>
         </div>
@@ -63,10 +63,17 @@
         @Prop({ type: Boolean, default: true })
         protected hasCheckoutButton!: boolean;
 
+        @Prop({ type: Object, default: null })
+        protected cart!: any;
+
         protected isCartOpen: boolean = true;
 
         protected toggleCart() {
             this.isCartOpen = !this.isCartOpen;
+        }
+
+        protected get isEmpty() {
+            return Object.keys(this.cart).length === 0;
         }
 
         protected goToCheckout() {
