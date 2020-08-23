@@ -10,44 +10,23 @@
         <hr v-if="isCartOpen">
         <div v-if="isCartOpen && !isEmpty" class="flex flex-col mt-5">
             <h4 class="text-lg text-gray-600 font-bold">Items:</h4>
-            <div v-for="product in cart.products" class="flex mb-1">
+            <div v-for="product in cartData.products" class="flex mb-1">
                 <h5 class="text-md w-1/12">{{ product.quantity }}x</h5>
                 <h5 class="text-md flex-1">{{ product.name }}</h5>
-                <h5 class="text-md text-right">{{ product.price }}€</h5>
+                <h5 class="text-md text-right">{{ product.totalPrice }}€</h5>
             </div>
-
-<!--            <div class="flex mb-1">-->
-<!--                <h5 class="text-md w-1/12">3x</h5>-->
-<!--                <h5 class="text-md flex-1">Ageece alfa</h5>-->
-<!--                <h5 class="text-md text-right">60,50€</h5>-->
-<!--            </div>-->
-<!--            <div class="flex mb-1">-->
-<!--                <h5 class="text-md w-1/12">3x</h5>-->
-<!--                <h5 class="text-md flex-1">Ageece alfa</h5>-->
-<!--                <h5 class="text-md text-right">60,50€</h5>-->
-<!--            </div>-->
-<!--            <div class="flex mb-1">-->
-<!--                <h5 class="text-md w-1/12">3x</h5>-->
-<!--                <h5 class="text-md flex-1">Ageece alfa</h5>-->
-<!--                <h5 class="text-md text-right">60,50€</h5>-->
-<!--            </div>-->
-<!--            <div class="flex mb-1">-->
-<!--                <h5 class="text-md w-1/12">3x</h5>-->
-<!--                <h5 class="text-md flex-1">Ageece alfa</h5>-->
-<!--                <h5 class="text-md text-right">60,50€</h5>-->
-<!--            </div>-->
             <hr class="mt-5">
             <div class="flex justify-between mt-5">
                 <h4 class="text-lg text-gray-600 font-bold">Subtotal:</h4>
-                <h4 class="text-lg font-bold">{{ cart.total }}€</h4>
+                <h4 class="text-lg font-bold">{{ cartData.total }}€</h4>
             </div>
             <div class="flex justify-between mt-1 ml-2">
                 <h4 class="text-lg text-gray-600 font-bold">Pay now:</h4>
-                <h4 class="text-lg font-bold">{{ cart.toPay }}€</h4>
+                <h4 class="text-lg font-bold">{{ cartData.totalToPay }}€</h4>
             </div>
             <div class="flex justify-between mt-1 ml-2">
                 <h4 class="text-lg text-gray-600 font-bold">Pay on pick up:</h4>
-                <h4 class="text-lg font-bold">{{ cart.toBePayed }}€</h4>
+                <h4 class="text-lg font-bold">{{ cartData.totalToBePayed }}€</h4>
             </div>
             <button v-if="hasCheckoutButton" class="btn-primary mt-5" @click="goToCheckout()">Proceed to checkout</button>
         </div>
@@ -57,6 +36,7 @@
 <script lang="ts">
     import Vue from 'vue'
     import { Component, Prop } from 'vue-property-decorator'
+    import EventBus from "../../helpers/event-bus";
 
     @Component
     export default class Cart extends Vue {
@@ -73,11 +53,20 @@
         }
 
         protected get isEmpty() {
-            return Object.keys(this.cart).length === 0;
+            return Object.keys(this.cartData).length === 0;
         }
 
         protected goToCheckout() {
             window.location.assign('/checkout');
+        }
+
+        protected cartData = this.cart;
+
+        protected created() {
+            EventBus.$on('productAdded', (cart: any) => {
+                console.log(cart);
+                this.cartData = cart;
+            });
         }
     }
 </script>

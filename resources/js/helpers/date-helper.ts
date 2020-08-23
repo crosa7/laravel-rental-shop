@@ -18,5 +18,5 @@ function getMonthWithLeadingZero(date: Date) {
 }
 
 function getDayWithLeadingZero(date: Date) {
-    return (date.getDate() < 10 ? '0' + (date.getDate() + 1) : date.getDate() + 1);
+    return (date.getDate() < 10 ? '0' + (date.getDate() + 1) : date.getDate());
 }

@@ -14,7 +14,7 @@
             <h4 class="text-2xl text-right">{{ product.price }}€</h4>
             <span class="text-right text-gray-400 text-sm flex-1">For 3 days</span>
             <div class="text-right mt-5 md:mt-0">
-                <input class="w-1/4 border-2 mb-1 text-center rounded" value="1" min="1" type="number">
+                <input class="w-1/4 border-2 mb-1 text-center rounded" v-model="product.quantity" value="1" min="1" type="number">
             </div>
             <button class="btn-primary" @click="addToCart">Add to cart</button>
         </div>
@@ -26,6 +26,7 @@
     import { Component, Prop } from 'vue-property-decorator'
     import { ProductInterface } from './shop.interface';
     import axios from 'axios';
+    import EventBus from '../../helpers/event-bus'
 
     @Component
     export default class ProductTile extends Vue {
@@ -33,7 +34,12 @@
         protected product!: ProductInterface;
 
         protected async addToCart() {
-            const response = await axios.post(`/ajax/cart/add-product`, this.product);
+           const response = await axios.post(`/ajax/cart/add-product`, this.product);
+           EventBus.$emit('productAdded', response.data)
+        }
+
+        protected mounted() {
+            this.product.quantity = 1;
         }
     }
 </script>

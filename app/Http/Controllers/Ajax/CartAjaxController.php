@@ -18,10 +18,12 @@ class CartAjaxController extends Controller
         $productModel = (new ProductModel())->fromArray($data);
 
         /** @var \App\Http\Repositories\Cart\CartSessionRepository $cartSessionRepository */
-        $cartSessionRepository = $this->getFactory(CartFactory::class)->getCartSessionRepository();
+        $cartSessionRepository = $this
+            ->getFactory(CartFactory::class)
+            ->getCartSessionRepository();
 
         $cartSessionRepository->addProduct($productModel);
 
-        return new JsonResponse($cartSessionRepository->get());
+        return new JsonResponse(json_decode($cartSessionRepository->get()));
     }
 }

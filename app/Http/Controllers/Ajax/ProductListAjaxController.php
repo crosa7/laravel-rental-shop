@@ -17,13 +17,17 @@ class ProductListAjaxController extends Controller
      */
     public function getByDates(Request $request): JsonResponse
     {
-        $startDate = date('m', strtotime($request->query('start')));
-
-        /** @var \App\Http\Repositories\Product\ProductsRepository $productsRepository */
+        /** @var \App\Http\Repositories\Product\ProductRepository $productsRepository */
         $productsRepository = $this
             ->getFactory(ProductFactory::class)
             ->getProductsRepository();
 
-        return new JsonResponse($productsRepository->getProductsByDate(new ProductFilterModel($startDate)));
+        return new JsonResponse(
+            $productsRepository->getProductsByDate(
+                new ProductFilterModel(
+                    $request->query('start'),
+                    $request->query('end'))
+            )
+        );
     }
 }

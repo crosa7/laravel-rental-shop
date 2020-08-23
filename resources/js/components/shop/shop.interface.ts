@@ -3,5 +3,6 @@ export interface ProductInterface {
     name: string;
     description: string;
     price: number;
+    totalPrice: number;
     quantity: number;
 }

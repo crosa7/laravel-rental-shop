@@ -12,6 +12,7 @@ class ProductModel extends BaseModel
     private const NAME = 'name';
     private const DESCRIPTION = 'description';
     private const PRICE = 'price';
+    private const TOTAL_PRICE = 'totalPrice';
     private const QUANTITY = 'quantity';
     private const CLASS_TYPE = 'classType';
 
@@ -19,6 +20,7 @@ class ProductModel extends BaseModel
         self::NAME,
         self::DESCRIPTION,
         self::PRICE,
+        self::TOTAL_PRICE,
         self::QUANTITY,
         self::ID,
         self::CLASS_TYPE,
@@ -40,6 +42,11 @@ class ProductModel extends BaseModel
     protected $price;
 
     /**
+     * @var float
+     */
+    protected $totalPrice;
+
+    /**
      * @var int
      */
     protected $quantity;
@@ -58,6 +65,7 @@ class ProductModel extends BaseModel
         string $name = null,
         string $description = null,
         float $price = null,
+        float $totalPrice = null,
         int $quantity = null,
         int $id = null,
         string $classType = 'ProductModel'
@@ -68,6 +76,7 @@ class ProductModel extends BaseModel
         $this->quantity = $quantity;
         $this->id = $id;
         $this->classType = $classType;
+        $this->totalPrice = $totalPrice;
     }
 
     /**
@@ -128,6 +137,22 @@ class ProductModel extends BaseModel
         $this->price = $price;
 
         return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotalPrice(): float
+    {
+        return $this->totalPrice;
+    }
+
+    /**
+     * @param float $totalPrice
+     */
+    public function setTotalPrice(float $totalPrice): void
+    {
+        $this->totalPrice = $totalPrice;
     }
 
     /**

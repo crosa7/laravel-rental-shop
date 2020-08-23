@@ -20235,6 +20235,7 @@ var App = /** @class */ (function (_super) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_property_decorator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-property-decorator */ "./node_modules/vue-property-decorator/lib/vue-property-decorator.js");
+/* harmony import */ var _helpers_event_bus__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helpers/event-bus */ "./resources/js/helpers/event-bus.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -20256,11 +20257,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 };
 
 
+
 var Cart = /** @class */ (function (_super) {
     __extends(Cart, _super);
     function Cart() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.isCartOpen = true;
+        _this.cartData = _this.cart;
         return _this;
     }
     Cart.prototype.toggleCart = function () {
@@ -20268,13 +20271,20 @@ var Cart = /** @class */ (function (_super) {
     };
     Object.defineProperty(Cart.prototype, "isEmpty", {
         get: function () {
-            return Object.keys(this.cart).length === 0;
+            return Object.keys(this.cartData).length === 0;
         },
         enumerable: false,
         configurable: true
     });
     Cart.prototype.goToCheckout = function () {
         window.location.assign('/checkout');
+    };
+    Cart.prototype.created = function () {
+        var _this = this;
+        _helpers_event_bus__WEBPACK_IMPORTED_MODULE_2__["default"].$on('productAdded', function (cart) {
+            console.log(cart);
+            _this.cartData = cart;
+        });
     };
     __decorate([
         Object(vue_property_decorator__WEBPACK_IMPORTED_MODULE_1__["Prop"])({ type: Boolean, default: true })
@@ -20574,6 +20584,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_property_decorator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-property-decorator */ "./node_modules/vue-property-decorator/lib/vue-property-decorator.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _helpers_event_bus__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helpers/event-bus */ "./resources/js/helpers/event-bus.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -20632,6 +20643,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var ProductTile = /** @class */ (function (_super) {
     __extends(ProductTile, _super);
     function ProductTile() {
@@ -20645,10 +20657,14 @@ var ProductTile = /** @class */ (function (_super) {
                     case 0: return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/ajax/cart/add-product", this.product)];
                     case 1:
                         response = _a.sent();
+                        _helpers_event_bus__WEBPACK_IMPORTED_MODULE_3__["default"].$emit('productAdded', response.data);
                         return [2 /*return*/];
                 }
             });
         });
+    };
+    ProductTile.prototype.mounted = function () {
+        this.product.quantity = 1;
     };
     __decorate([
         Object(vue_property_decorator__WEBPACK_IMPORTED_MODULE_1__["Prop"])({ required: true, type: Object })
@@ -21096,7 +21112,7 @@ var render = function() {
                 _vm._v("Items:")
               ]),
               _vm._v(" "),
-              _vm._l(_vm.cart.products, function(product) {
+              _vm._l(_vm.cartData.products, function(product) {
                 return _c("div", { staticClass: "flex mb-1" }, [
                   _c("h5", { staticClass: "text-md w-1/12" }, [
                     _vm._v(_vm._s(product.quantity) + "x")
@@ -21107,7 +21123,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("h5", { staticClass: "text-md text-right" }, [
-                    _vm._v(_vm._s(product.price) + "€")
+                    _vm._v(_vm._s(product.totalPrice) + "€")
                   ])
                 ])
               }),
@@ -21120,7 +21136,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("h4", { staticClass: "text-lg font-bold" }, [
-                  _vm._v(_vm._s(_vm.cart.total) + "€")
+                  _vm._v(_vm._s(_vm.cartData.total) + "€")
                 ])
               ]),
               _vm._v(" "),
@@ -21130,7 +21146,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("h4", { staticClass: "text-lg font-bold" }, [
-                  _vm._v(_vm._s(_vm.cart.toPay) + "€")
+                  _vm._v(_vm._s(_vm.cartData.totalToPay) + "€")
                 ])
               ]),
               _vm._v(" "),
@@ -21140,7 +21156,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("h4", { staticClass: "text-lg font-bold" }, [
-                  _vm._v(_vm._s(_vm.cart.toBePayed) + "€")
+                  _vm._v(_vm._s(_vm.cartData.totalToBePayed) + "€")
                 ])
               ]),
               _vm._v(" "),
@@ -21942,7 +21958,29 @@ var render = function() {
             [_vm._v("For 3 days")]
           ),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "text-right mt-5 md:mt-0" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.quantity,
+                  expression: "product.quantity"
+                }
+              ],
+              staticClass: "w-1/4 border-2 mb-1 text-center rounded",
+              attrs: { value: "1", min: "1", type: "number" },
+              domProps: { value: _vm.product.quantity },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "quantity", $event.target.value)
+                }
+              }
+            })
+          ]),
           _vm._v(" "),
           _c(
             "button",
@@ -21954,19 +21992,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-right mt-5 md:mt-0" }, [
-      _c("input", {
-        staticClass: "w-1/4 border-2 mb-1 text-center rounded",
-        attrs: { value: "1", min: "1", type: "number" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -34907,8 +34933,25 @@ function getMonthWithLeadingZero(date) {
     return (date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
 }
 function getDayWithLeadingZero(date) {
-    return (date.getDate() < 10 ? '0' + (date.getDate() + 1) : date.getDate() + 1);
+    return (date.getDate() < 10 ? '0' + (date.getDate() + 1) : date.getDate());
 }
+
+
+/***/ }),
+
+/***/ "./resources/js/helpers/event-bus.ts":
+/*!*******************************************!*\
+  !*** ./resources/js/helpers/event-bus.ts ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+
+var EventBus = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]();
+/* harmony default export */ __webpack_exports__["default"] = (EventBus);
 
 
 /***/ }),
