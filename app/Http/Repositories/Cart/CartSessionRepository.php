@@ -45,15 +45,16 @@ class CartSessionRepository
         }
 
         foreach ($cartModel->getProducts() as $product) {
-            if ($product['id'] === $productModel->getId()) { // TODO Refactor fromArray to be recursive
-                $product['quantity'] += 1;
+            if ($product->getId() === $productModel->getId()) {
+                $product->setQuantity($product->getQuantity() + 1);
 
-                break;
+                Session::put(self::CART_SESSION_KEY, json_encode($cartModel->toArray()));
+
+                return;
             }
         }
 
-        $productModel->setQuantity(1);
-        $cartModel->addProduct($productModel);
+        $cartModel->addProduct($productModel->setQuantity(1));
 
         Session::put(self::CART_SESSION_KEY, json_encode($cartModel->toArray()));
     }

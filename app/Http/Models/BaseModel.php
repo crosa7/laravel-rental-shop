@@ -17,6 +17,14 @@ class BaseModel implements ModelInterface
     {
         foreach ($data as $fieldName => $value) {
             if (in_array($fieldName, $this->propertyNames) && $value !== null) {
+                if (is_array($value)) {
+                    foreach ($value as $child) {
+                        $model = new $child['classType'];
+                        $model->fromArray($child);
+                        $this->$fieldName[] = $model;
+                    }
+                    continue;
+                }
                 $this->$fieldName = $value;
             }
         }

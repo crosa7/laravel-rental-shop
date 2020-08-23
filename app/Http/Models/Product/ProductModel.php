@@ -13,6 +13,7 @@ class ProductModel extends BaseModel
     private const DESCRIPTION = 'description';
     private const PRICE = 'price';
     private const QUANTITY = 'quantity';
+    private const CLASS_TYPE = 'classType';
 
     protected $propertyNames = [
         self::NAME,
@@ -20,6 +21,7 @@ class ProductModel extends BaseModel
         self::PRICE,
         self::QUANTITY,
         self::ID,
+        self::CLASS_TYPE,
     ];
 
     /**
@@ -47,18 +49,25 @@ class ProductModel extends BaseModel
      */
     protected $id;
 
+    /**
+     * @var int
+     */
+    protected $classType;
+
     public function __construct(
         string $name = null,
         string $description = null,
         float $price = null,
         int $quantity = null,
-        int $id = null
+        int $id = null,
+        string $classType = 'ProductModel'
     ) {
         $this->name = $name;
         $this->description = $description;
         $this->price = $price;
         $this->quantity = $quantity;
         $this->id = $id;
+        $this->classType = $classType;
     }
 
     /**
