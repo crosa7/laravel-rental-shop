@@ -60,6 +60,13 @@ services:
     networks:
       - laravel
 
+  mailcatcher:
+    image: schickling/mailcatcher:latest
+    container_name: mailcatcher
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+
   npm:
     image: node:13.7
     container_name: npm

@@ -23,6 +23,10 @@ Route::get('/', 'ProductPageController@index');
 Route::get('/ajax/product-list', 'Ajax\ProductListAjaxController@getByDates');
 Route::post('/ajax/cart/add-product', 'Ajax\CartAjaxController@addProduct');
 
-Route::get('/checkout', function () {
-    return view('checkout');
-});
+/*
+|--------------------------------------------------------------------------
+| Checkout Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/checkout', 'CheckoutPageController@index');
+Route::get('/checkout/place-order', 'PlaceOrderController@index');

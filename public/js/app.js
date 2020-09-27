@@ -20312,9 +20312,9 @@ var Cart = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.esm.js");
-/* harmony import */ var _Cart_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Cart.vue */ "./resources/js/components/shop/Cart.vue");
-/* harmony import */ var _models_CheckoutForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/CheckoutForm */ "./resources/js/models/CheckoutForm.ts");
+/* harmony import */ var _Cart_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Cart.vue */ "./resources/js/components/shop/Cart.vue");
+/* harmony import */ var _models_CheckoutForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../models/CheckoutForm */ "./resources/js/models/CheckoutForm.ts");
+/* harmony import */ var vue_property_decorator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-property-decorator */ "./node_modules/vue-property-decorator/lib/vue-property-decorator.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -20380,7 +20380,7 @@ var CheckoutPage = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.isCartOpen = true;
         _this.requiredFields = ['email', 'name', 'country', 'phone', 'paymentMethod'];
-        _this.checkoutForm = new _models_CheckoutForm__WEBPACK_IMPORTED_MODULE_3__["CheckoutForm"]();
+        _this.checkoutForm = new _models_CheckoutForm__WEBPACK_IMPORTED_MODULE_2__["CheckoutForm"]();
         _this.errors = {};
         return _this;
     }
@@ -20397,7 +20397,7 @@ var CheckoutPage = /** @class */ (function (_super) {
                     return [2 /*return*/];
                 }
                 // Do something
-                this.checkoutForm = new _models_CheckoutForm__WEBPACK_IMPORTED_MODULE_3__["CheckoutForm"]();
+                this.checkoutForm = new _models_CheckoutForm__WEBPACK_IMPORTED_MODULE_2__["CheckoutForm"]();
                 return [2 /*return*/];
             });
         });
@@ -20416,13 +20416,16 @@ var CheckoutPage = /** @class */ (function (_super) {
         this.errors[fieldName] = [];
     };
     CheckoutPage.prototype.resetForm = function () {
-        this.checkoutForm = new _models_CheckoutForm__WEBPACK_IMPORTED_MODULE_3__["CheckoutForm"]();
+        this.checkoutForm = new _models_CheckoutForm__WEBPACK_IMPORTED_MODULE_2__["CheckoutForm"]();
         this.errors = {};
     };
+    __decorate([
+        Object(vue_property_decorator__WEBPACK_IMPORTED_MODULE_3__["Prop"])({ type: Object, required: true })
+    ], CheckoutPage.prototype, "cart", void 0);
     CheckoutPage = __decorate([
-        Object(vue_class_component__WEBPACK_IMPORTED_MODULE_1__["default"])({
+        Object(vue_property_decorator__WEBPACK_IMPORTED_MODULE_3__["Component"])({
             components: {
-                Cart: _Cart_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+                Cart: _Cart_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
             }
         })
     ], CheckoutPage);
@@ -21207,14 +21210,11 @@ var render = function() {
     "div",
     { staticClass: "mt-10 flex flex-col md:flex-row justify-between p-2" },
     [
-      _c("cart", { attrs: { "has-checkout-button": false } }),
+      _c("cart", { attrs: { cart: _vm.cart, "has-checkout-button": false } }),
       _vm._v(" "),
       _c(
         "div",
-        {
-          staticClass:
-            "md:m-auto md:w-1/2 flex flex-col md:flex-row mb-5 md:border md:border-4 bg-white md:rounded md:shadow p-6"
-        },
+        { staticClass: "md:m-auto md:w-1/2 flex flex-col md:flex-row mb-5" },
         [
           _c(
             "form",
@@ -21230,426 +21230,468 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "w-full" }, [
-                _c("div", { staticClass: "md:flex" }, [
-                  _c("label", { staticClass: "mb-5 block md:w-1/2" }, [
-                    _c("span", { staticClass: "input-label" }, [
-                      _vm._v("Name:*")
-                    ]),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "md:border md:border-4 bg-white md:rounded md:shadow p-6"
+                  },
+                  [
+                    _vm._m(0),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.checkoutForm.name,
-                          expression: "checkoutForm.name"
-                        }
-                      ],
-                      staticClass: "block w-full",
-                      attrs: { id: "name", type: "text" },
-                      domProps: { value: _vm.checkoutForm.name },
-                      on: {
-                        keydown: function($event) {
-                          return _vm.clearError("name")
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.checkoutForm,
-                            "name",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.name
-                      ? _c("span", { staticClass: "text-red-400" }, [
-                          _vm._v(_vm._s(_vm.errors.name[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "mb-5 block md:w-1/2 md:ml-4" }, [
-                    _c("span", { staticClass: "input-label" }, [
-                      _vm._v("Country:*")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.checkoutForm.country,
-                          expression: "checkoutForm.country"
-                        }
-                      ],
-                      staticClass: "block w-full",
-                      attrs: { id: "country", type: "text" },
-                      domProps: { value: _vm.checkoutForm.country },
-                      on: {
-                        keydown: function($event) {
-                          return _vm.clearError("country")
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.checkoutForm,
-                            "country",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.country
-                      ? _c("span", { staticClass: "text-red-400" }, [
-                          _vm._v(_vm._s(_vm.errors.country[0]))
-                        ])
-                      : _vm._e()
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "md:flex" }, [
-                  _c("label", { staticClass: "mb-5 block md:w-1/2" }, [
-                    _c("span", { staticClass: "input-label" }, [
-                      _vm._v("Email:*")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.checkoutForm.email,
-                          expression: "checkoutForm.email"
-                        }
-                      ],
-                      staticClass: "border-2 block w-full",
-                      attrs: { id: "email", type: "email" },
-                      domProps: { value: _vm.checkoutForm.email },
-                      on: {
-                        keydown: function($event) {
-                          return _vm.clearError("email")
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.checkoutForm,
-                            "email",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.email
-                      ? _c("span", { staticClass: "text-red-400" }, [
-                          _vm._v(_vm._s(_vm.errors.email[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "mb-5 block md:w-1/2 md:ml-4" }, [
-                    _c("span", { staticClass: "input-label" }, [
-                      _vm._v("Home address:")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.checkoutForm.address,
-                          expression: "checkoutForm.address"
-                        }
-                      ],
-                      staticClass: "block w-full",
-                      attrs: { id: "address", type: "text" },
-                      domProps: { value: _vm.checkoutForm.address },
-                      on: {
-                        keydown: function($event) {
-                          return _vm.clearError("address")
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.checkoutForm,
-                            "address",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.address
-                      ? _c("span", { staticClass: "text-red-400" }, [
-                          _vm._v(_vm._s(_vm.errors.address[0]))
-                        ])
-                      : _vm._e()
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "md:flex" }, [
-                  _c("label", { staticClass: "mb-5 block md:w-1/2" }, [
-                    _c("span", { staticClass: "input-label" }, [
-                      _vm._v("Phone number:*")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.checkoutForm.phone,
-                          expression: "checkoutForm.phone"
-                        }
-                      ],
-                      staticClass: "block w-full",
-                      attrs: { id: "phone", type: "text" },
-                      domProps: { value: _vm.checkoutForm.phone },
-                      on: {
-                        keydown: function($event) {
-                          return _vm.clearError("phone")
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.checkoutForm,
-                            "phone",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.phone
-                      ? _c("span", { staticClass: "text-red-400" }, [
-                          _vm._v(_vm._s(_vm.errors.phone[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "mb-5 block md:w-1/2 md:ml-4" }, [
-                    _c("span", { staticClass: "input-label" }, [
-                      _vm._v("Postal Code:")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.checkoutForm.zipCode,
-                          expression: "checkoutForm.zipCode"
-                        }
-                      ],
-                      staticClass: "block w-full",
-                      attrs: { id: "zipCode", type: "text" },
-                      domProps: { value: _vm.checkoutForm.zipCode },
-                      on: {
-                        keydown: function($event) {
-                          return _vm.clearError("zipCode")
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.checkoutForm,
-                            "zipCode",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.zipCode
-                      ? _c("span", { staticClass: "text-red-400" }, [
-                          _vm._v(_vm._s(_vm.errors.zipCode[0]))
-                        ])
-                      : _vm._e()
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mb-5" }, [
-                  _c("label", { staticClass: "block" }, [
-                    _c("span", { staticClass: "input-label" }, [
-                      _vm._v("Date of birth:")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.checkoutForm.dateOfBirth,
-                          expression: "checkoutForm.dateOfBirth"
-                        }
-                      ],
-                      staticClass: "block w-full",
-                      attrs: { id: "dateOfBirth", type: "date" },
-                      domProps: { value: _vm.checkoutForm.dateOfBirth },
-                      on: {
-                        change: function($event) {
-                          return _vm.clearError("dateOfBirth")
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.checkoutForm,
-                            "dateOfBirth",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.dateOfBirth
-                      ? _c("span", { staticClass: "text-red-400" }, [
-                          _vm._v(_vm._s(_vm.errors.dateOfBirth[0]))
-                        ])
-                      : _vm._e()
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mb-5" }, [
-                  _c("label", { staticClass: "block" }, [
-                    _c("span", { staticClass: "input-label" }, [
-                      _vm._v("Additional Info:*")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "border-2 p-4 rounded" },
-                      _vm._l(5, function(count) {
-                        return _c(
-                          "div",
-                          {
-                            staticClass:
-                              "flex flex-col md:flex-row md:w-1/2 justify-between mb-2"
-                          },
-                          [_vm._m(0, true), _vm._v(" "), _vm._m(1, true)]
-                        )
-                      }),
-                      0
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mb-5" }, [
-                  _c("label", [
-                    _c("span", { staticClass: "input-label" }, [
-                      _vm._v("Payment Method:*")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c(
-                        "div",
-                        { staticClass: "border-2 rounded p-5 bg-gray-200" },
-                        [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.checkoutForm.paymentMethod,
-                                  expression: "checkoutForm.paymentMethod"
-                                }
-                              ],
-                              attrs: {
-                                type: "radio",
-                                name: "paymentRadio",
-                                value: "paypal"
-                              },
-                              domProps: {
-                                checked: _vm._q(
-                                  _vm.checkoutForm.paymentMethod,
-                                  "paypal"
-                                )
-                              },
-                              on: {
-                                change: function($event) {
-                                  return _vm.$set(
-                                    _vm.checkoutForm,
-                                    "paymentMethod",
-                                    "paypal"
-                                  )
-                                }
+                    _c("div", { staticClass: "md:flex" }, [
+                      _c("label", { staticClass: "mb-5 block md:w-1/2" }, [
+                        _c("span", { staticClass: "input-label" }, [
+                          _vm._v("Name:*")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.checkoutForm.name,
+                              expression: "checkoutForm.name"
+                            }
+                          ],
+                          staticClass: "block w-full",
+                          attrs: { id: "name", type: "text" },
+                          domProps: { value: _vm.checkoutForm.name },
+                          on: {
+                            keydown: function($event) {
+                              return _vm.clearError("name")
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
                               }
-                            }),
-                            _vm._v(" "),
-                            _vm._m(2)
-                          ])
-                        ]
-                      ),
+                              _vm.$set(
+                                _vm.checkoutForm,
+                                "name",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.name
+                          ? _c("span", { staticClass: "text-red-400" }, [
+                              _vm._v(_vm._s(_vm.errors.name[0]))
+                            ])
+                          : _vm._e()
+                      ]),
                       _vm._v(" "),
                       _c(
-                        "div",
-                        {
-                          staticClass: "border-2 rounded p-5 bg-gray-200 mt-2"
-                        },
+                        "label",
+                        { staticClass: "mb-5 block md:w-1/2 md:ml-4" },
                         [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.checkoutForm.paymentMethod,
-                                  expression: "checkoutForm.paymentMethod"
-                                }
-                              ],
-                              attrs: {
-                                type: "radio",
-                                name: "paymentRadio",
-                                value: "visa"
-                              },
-                              domProps: {
-                                checked: _vm._q(
-                                  _vm.checkoutForm.paymentMethod,
-                                  "visa"
-                                )
-                              },
-                              on: {
-                                change: function($event) {
-                                  return _vm.$set(
-                                    _vm.checkoutForm,
-                                    "paymentMethod",
-                                    "visa"
-                                  )
-                                }
+                          _c("span", { staticClass: "input-label" }, [
+                            _vm._v("Phone number:*")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.checkoutForm.phone,
+                                expression: "checkoutForm.phone"
                               }
-                            }),
-                            _vm._v(" "),
-                            _vm._m(3)
-                          ])
+                            ],
+                            staticClass: "block w-full",
+                            attrs: { id: "phone", type: "text" },
+                            domProps: { value: _vm.checkoutForm.phone },
+                            on: {
+                              keydown: function($event) {
+                                return _vm.clearError("phone")
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.checkoutForm,
+                                  "phone",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.phone
+                            ? _c("span", { staticClass: "text-red-400" }, [
+                                _vm._v(_vm._s(_vm.errors.phone[0]))
+                              ])
+                            : _vm._e()
                         ]
                       )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm.errors.paymentMethod
-                    ? _c("span", { staticClass: "text-red-400" }, [
-                        _vm._v(_vm._s(_vm.errors.paymentMethod[0]))
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "md:flex" }, [
+                      _c("label", { staticClass: "mb-5 block md:w-1/2" }, [
+                        _c("span", { staticClass: "input-label" }, [
+                          _vm._v("Email:*")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.checkoutForm.email,
+                              expression: "checkoutForm.email"
+                            }
+                          ],
+                          staticClass: "border-2 block w-full",
+                          attrs: { id: "email", type: "email" },
+                          domProps: { value: _vm.checkoutForm.email },
+                          on: {
+                            keydown: function($event) {
+                              return _vm.clearError("email")
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.checkoutForm,
+                                "email",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.email
+                          ? _c("span", { staticClass: "text-red-400" }, [
+                              _vm._v(_vm._s(_vm.errors.email[0]))
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        { staticClass: "mb-5 block md:w-1/2 md:ml-4" },
+                        [
+                          _c("span", { staticClass: "input-label" }, [
+                            _vm._v("Date of birth:")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.checkoutForm.dateOfBirth,
+                                expression: "checkoutForm.dateOfBirth"
+                              }
+                            ],
+                            staticClass: "block w-full",
+                            attrs: { id: "dateOfBirth", type: "date" },
+                            domProps: { value: _vm.checkoutForm.dateOfBirth },
+                            on: {
+                              change: function($event) {
+                                return _vm.clearError("dateOfBirth")
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.checkoutForm,
+                                  "dateOfBirth",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.dateOfBirth
+                            ? _c("span", { staticClass: "text-red-400" }, [
+                                _vm._v(_vm._s(_vm.errors.dateOfBirth[0]))
+                              ])
+                            : _vm._e()
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "md:flex" }, [
+                      _c("label", { staticClass: "mb-5 block md:w-1/2" }, [
+                        _c("span", { staticClass: "input-label" }, [
+                          _vm._v("Country:*")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.checkoutForm.country,
+                              expression: "checkoutForm.country"
+                            }
+                          ],
+                          staticClass: "block w-full",
+                          attrs: { id: "country", type: "text" },
+                          domProps: { value: _vm.checkoutForm.country },
+                          on: {
+                            keydown: function($event) {
+                              return _vm.clearError("country")
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.checkoutForm,
+                                "country",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.country
+                          ? _c("span", { staticClass: "text-red-400" }, [
+                              _vm._v(_vm._s(_vm.errors.country[0]))
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        { staticClass: "mb-5 block md:w-1/2 md:ml-4" },
+                        [
+                          _c("span", { staticClass: "input-label" }, [
+                            _vm._v("Postal Code:")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.checkoutForm.zipCode,
+                                expression: "checkoutForm.zipCode"
+                              }
+                            ],
+                            staticClass: "block w-full",
+                            attrs: { id: "zipCode", type: "text" },
+                            domProps: { value: _vm.checkoutForm.zipCode },
+                            on: {
+                              keydown: function($event) {
+                                return _vm.clearError("zipCode")
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.checkoutForm,
+                                  "zipCode",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.zipCode
+                            ? _c("span", { staticClass: "text-red-400" }, [
+                                _vm._v(_vm._s(_vm.errors.zipCode[0]))
+                              ])
+                            : _vm._e()
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-5" }, [
+                      _c("label", { staticClass: "block" }, [
+                        _c("span", { staticClass: "input-label" }, [
+                          _vm._v("Home address:")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.checkoutForm.address,
+                              expression: "checkoutForm.address"
+                            }
+                          ],
+                          staticClass: "block w-full",
+                          attrs: { id: "address", type: "text" },
+                          domProps: { value: _vm.checkoutForm.address },
+                          on: {
+                            keydown: function($event) {
+                              return _vm.clearError("address")
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.checkoutForm,
+                                "address",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.address
+                          ? _c("span", { staticClass: "text-red-400" }, [
+                              _vm._v(_vm._s(_vm.errors.address[0]))
+                            ])
+                          : _vm._e()
                       ])
-                    : _vm._e()
-                ]),
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
-                _c("div", { staticClass: "flex justify-between" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "md:border md:border-4 bg-white md:rounded md:shadow p-6 mt-4"
+                  },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-5" }, [
+                      _c("label", { staticClass: "block" }, [
+                        _c(
+                          "div",
+                          { staticClass: "border-2 p-4 rounded" },
+                          _vm._l(5, function(count) {
+                            return _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex flex-col md:flex-row md:w-1/2 justify-between mb-2"
+                              },
+                              [_vm._m(2, true), _vm._v(" "), _vm._m(3, true)]
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "md:border md:border-4 bg-white md:rounded md:shadow p-6 mt-4"
+                  },
+                  [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-5" }, [
+                      _c("label", [
+                        _c("span", { staticClass: "input-label" }, [
+                          _vm._v("Payment Method:*")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c(
+                            "div",
+                            { staticClass: "border-2 rounded p-5 bg-gray-200" },
+                            [
+                              _c("label", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.checkoutForm.paymentMethod,
+                                      expression: "checkoutForm.paymentMethod"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "radio",
+                                    name: "paymentRadio",
+                                    value: "paypal"
+                                  },
+                                  domProps: {
+                                    checked: _vm._q(
+                                      _vm.checkoutForm.paymentMethod,
+                                      "paypal"
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      return _vm.$set(
+                                        _vm.checkoutForm,
+                                        "paymentMethod",
+                                        "paypal"
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _vm._m(5)
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "border-2 rounded p-5 bg-gray-200 mt-2"
+                            },
+                            [
+                              _c("label", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.checkoutForm.paymentMethod,
+                                      expression: "checkoutForm.paymentMethod"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "radio",
+                                    name: "paymentRadio",
+                                    value: "visa"
+                                  },
+                                  domProps: {
+                                    checked: _vm._q(
+                                      _vm.checkoutForm.paymentMethod,
+                                      "visa"
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      return _vm.$set(
+                                        _vm.checkoutForm,
+                                        "paymentMethod",
+                                        "visa"
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _vm._m(6)
+                              ])
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm.errors.paymentMethod
+                        ? _c("span", { staticClass: "text-red-400" }, [
+                            _vm._v(_vm._s(_vm.errors.paymentMethod[0]))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex justify-between mt-4" }, [
                   _c(
                     "button",
                     {
@@ -21687,6 +21729,40 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex items-center mb-4" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "inline-flex w-10 h-10 border-2 rounded-full items-center justify-center bg-white mr-2"
+        },
+        [_vm._v("1")]
+      ),
+      _vm._v(" "),
+      _c("div", [_vm._v("Contact Info")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex items-center mb-4" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "inline-flex w-10 h-10 border-2 rounded-full items-center justify-center bg-white mr-2"
+        },
+        [_vm._v("2")]
+      ),
+      _vm._v(" "),
+      _c("div", [_vm._v("Bike sizing Info")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("label", { staticClass: "block mb-2 md:mb-0 w-full" }, [
       _c("span", [_vm._v("Gender:")]),
       _vm._v(" "),
@@ -21709,6 +21785,23 @@ var staticRenderFns = [
       _c("span", [_vm._v("Height(cm):")]),
       _vm._v(" "),
       _c("input", { staticClass: "block h-10 w-full", attrs: { type: "text" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex items-center mb-4" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "inline-flex w-10 h-10 border-2 rounded-full items-center justify-center bg-white mr-2"
+        },
+        [_vm._v("3")]
+      ),
+      _vm._v(" "),
+      _c("div", [_vm._v("Payment Info")])
     ])
   },
   function() {

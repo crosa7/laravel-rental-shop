@@ -14,6 +14,7 @@ class ProductModel extends BaseModel
     private const PRICE = 'price';
     private const TOTAL_PRICE = 'totalPrice';
     private const QUANTITY = 'quantity';
+    private const NUMBER_OF_DAYS = 'numberOfDays';
     private const CLASS_TYPE = 'classType';
 
     protected $propertyNames = [
@@ -22,6 +23,7 @@ class ProductModel extends BaseModel
         self::PRICE,
         self::TOTAL_PRICE,
         self::QUANTITY,
+        self::NUMBER_OF_DAYS,
         self::ID,
         self::CLASS_TYPE,
     ];
@@ -61,12 +63,18 @@ class ProductModel extends BaseModel
      */
     protected $classType;
 
+    /**
+     * @var int
+     */
+    protected $numberOfDays;
+
     public function __construct(
         string $name = null,
         string $description = null,
         float $price = null,
         float $totalPrice = null,
         int $quantity = null,
+        int $numberOfDays = null,
         int $id = null,
         string $classType = 'ProductModel'
     ) {
@@ -77,6 +85,7 @@ class ProductModel extends BaseModel
         $this->id = $id;
         $this->classType = $classType;
         $this->totalPrice = $totalPrice;
+        $this->numberOfDays = $numberOfDays;
     }
 
     /**
@@ -173,6 +182,22 @@ class ProductModel extends BaseModel
         $this->quantity = $quantity;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberOfDays(): int
+    {
+        return $this->numberOfDays;
+    }
+
+    /**
+     * @param int $numberOfDays
+     */
+    public function setNumberOfDays(int $numberOfDays): void
+    {
+        $this->numberOfDays = $numberOfDays;
     }
 
     /**

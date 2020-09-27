@@ -43,20 +43,22 @@ class ProductRepository
             ->where('number_of_days', '=', $numberOfDays)
             ->get();
 
-        return $this->mapFromArrayToModelArray($productsArray->toArray());
+        return $this->mapFromArrayToModelArray($productsArray->toArray(), $numberOfDays);
     }
 
     /**
      * @param array $data
+     * @param int $numberOfDays
      *
      * @return \App\Http\Models\Product\ProductModel[]
      */
-    private function mapFromArrayToModelArray(array $data): array
+    private function mapFromArrayToModelArray(array $data, int $numberOfDays): array
     {
         $productModelArray = [];
         foreach ($data as $item) {
             $productModel = new ProductModel();
             $productModel->fromArray((array)$item);
+            $productModel->setNumberOfDays($numberOfDays);
 
             $productModelArray[] = $productModel->toArray();
         }

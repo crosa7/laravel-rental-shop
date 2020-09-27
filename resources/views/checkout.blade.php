@@ -1,5 +1,5 @@
 @extends('base')
 
 @section('main')
-<checkout-page></checkout-page>
+<checkout-page :cart="{{ $cart }}"></checkout-page>
 @endsection
