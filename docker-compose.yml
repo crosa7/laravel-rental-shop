@@ -15,8 +15,10 @@ services:
     depends_on:
       - php
       - mysql
-    networks:
-      - laravel
+    links:
+      - mysql
+      - php
+      - mailcatcher
 
   mysql:
     image: mysql:5.7.29
@@ -32,8 +34,6 @@ services:
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
-    networks:
-      - laravel
     volumes:
       - ./mysql:/var/lib/mysql
 
@@ -46,8 +46,8 @@ services:
       - ./:/var/www/html
     ports:
       - "9000:9000"
-    networks:
-      - laravel
+    links:
+      - mailcatcher
 
   composer:
     image: composer:latest
@@ -57,8 +57,6 @@ services:
     working_dir: /var/www/html
     depends_on:
       - php
-    networks:
-      - laravel
 
   mailcatcher:
     image: schickling/mailcatcher:latest
@@ -86,5 +84,3 @@ services:
       - mysql
     working_dir: /var/www/html
     entrypoint: ['php', '/var/www/html/artisan']
-    networks:
-      - laravel

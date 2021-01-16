@@ -35023,7 +35023,7 @@ function getFormattedDate(date) {
     return formattedDate.getFullYear() + '-' + getMonthWithLeadingZero(formattedDate) + '-' + getDayWithLeadingZero(formattedDate);
 }
 function getMonthWithLeadingZero(date) {
-    return (date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    return (date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
 }
 function getDayWithLeadingZero(date) {
     return (date.getDate() < 10 ? '0' + (date.getDate() + 1) : date.getDate());

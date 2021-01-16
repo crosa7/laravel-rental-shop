@@ -12,7 +12,12 @@ use Illuminate\Http\Request;
 
 class CartAjaxController extends Controller
 {
-    public function addProduct(Request $request)
+    /**
+     * @param \Illuminate\Http\Request $request
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addProduct(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
         $productModel = (new ProductModel())->fromArray($data);

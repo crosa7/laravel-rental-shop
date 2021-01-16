@@ -14,7 +14,7 @@ export function getFormattedDate(date: any) {
 }
 
 function getMonthWithLeadingZero(date: Date) {
-    return (date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    return (date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
 }
 
 function getDayWithLeadingZero(date: Date) {
