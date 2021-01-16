@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Models;
+namespace App\Http\Transfers;
 
 
 interface ModelInterface

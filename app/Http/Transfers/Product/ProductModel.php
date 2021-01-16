@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Http\Models\Product;
+namespace App\Http\Transfers\Product;
 
 
-use App\Http\Models\BaseModel;
+use App\Http\Transfers\BaseModel;
 
 class ProductModel extends BaseModel
 {
@@ -99,7 +99,7 @@ class ProductModel extends BaseModel
     /**
      * @param string $name
      *
-     * @return \App\Http\Models\Product\ProductModel
+     * @return \App\Http\Transfers\Product\ProductModel
      */
     public function setName(string $name): self
     {
@@ -119,7 +119,7 @@ class ProductModel extends BaseModel
     /**
      * @param string $description
      *
-     * @return \App\Http\Models\Product\ProductModel
+     * @return \App\Http\Transfers\Product\ProductModel
      */
     public function setDescription(string $description): self
     {
@@ -139,7 +139,7 @@ class ProductModel extends BaseModel
     /**
      * @param float $price
      *
-     * @return \App\Http\Models\Product\ProductModel
+     * @return \App\Http\Transfers\Product\ProductModel
      */
     public function setPrice(float $price): self
     {
@@ -175,7 +175,7 @@ class ProductModel extends BaseModel
     /**
      * @param int $quantity
      *
-     * @return \App\Http\Models\Product\ProductModel
+     * @return \App\Http\Transfers\Product\ProductModel
      */
     public function setQuantity(int $quantity): self
     {
@@ -211,7 +211,7 @@ class ProductModel extends BaseModel
     /**
      * @param int $id
      *
-     * @return \App\Http\Models\Product\ProductModel
+     * @return \App\Http\Transfers\Product\ProductModel
      */
     public function setId(int $id): self
     {

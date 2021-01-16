@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Http\Models\Cart;
+namespace App\Http\Transfers\Cart;
 
 
-use App\Http\Models\BaseModel;
-use App\Http\Models\Product\ProductModel;
+use App\Http\Transfers\BaseModel;
+use App\Http\Transfers\Product\ProductModel;
 
 class CartModel extends BaseModel
 {
@@ -81,7 +81,7 @@ class CartModel extends BaseModel
     /**
      * @param array $products
      *
-     * @return \App\Http\Models\Cart\CartModel
+     * @return \App\Http\Transfers\Cart\CartModel
      */
     public function setProducts(array $products): self
     {
@@ -91,9 +91,9 @@ class CartModel extends BaseModel
     }
 
     /**
-     * @param \App\Http\Models\Product\ProductModel $productModel
+     * @param \App\Http\Transfers\Product\ProductModel $productModel
      *
-     * @return \App\Http\Models\Cart\CartModel
+     * @return \App\Http\Transfers\Cart\CartModel
      */
     public function addProduct(ProductModel $productModel): self
     {

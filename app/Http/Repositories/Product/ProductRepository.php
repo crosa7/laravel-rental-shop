@@ -4,7 +4,7 @@
 namespace App\Http\Repositories\Product;
 
 
-use App\Http\Models\Product\ProductModel;
+use App\Http\Transfers\Product\ProductModel;
 use App\Http\Repositories\Product\Models\ProductFilterModel;
 use DateTime;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +17,7 @@ class ProductRepository
     /**
      * @param \App\Http\Repositories\Product\Models\ProductFilterModel $productFilterModel
      *
-     * @return \App\Http\Models\Product\ProductModel[]
+     * @return \App\Http\Transfers\Product\ProductModel[]
      */
     public function getProductsByDate(ProductFilterModel $productFilterModel): array
     {
@@ -50,7 +50,7 @@ class ProductRepository
      * @param array $data
      * @param int $numberOfDays
      *
-     * @return \App\Http\Models\Product\ProductModel[]
+     * @return \App\Http\Transfers\Product\ProductModel[]
      */
     private function mapFromArrayToModelArray(array $data, int $numberOfDays): array
     {

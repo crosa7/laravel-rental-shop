@@ -4,8 +4,8 @@
 namespace App\Http\Repositories\Cart;
 
 
-use App\Http\Models\Cart\CartModel;
-use App\Http\Models\Product\ProductModel;
+use App\Http\Transfers\Cart\CartModel;
+use App\Http\Transfers\Product\ProductModel;
 use Illuminate\Support\Facades\Session;
 
 class CartSessionRepository
@@ -23,7 +23,7 @@ class CartSessionRepository
     }
 
     /**
-     * @param \App\Http\Models\Cart\CartModel $cartModel
+     * @param \App\Http\Transfers\Cart\CartModel $cartModel
      *
      * @return \Illuminate\Session\SessionManager|\Illuminate\Session\Store|mixed
      */
@@ -33,7 +33,7 @@ class CartSessionRepository
     }
 
     /**
-     * @param \App\Http\Models\Product\ProductModel $productModel
+     * @param \App\Http\Transfers\Product\ProductModel $productModel
      *
      * @return \Illuminate\Session\SessionManager|\Illuminate\Session\Store|mixed
      */
@@ -58,7 +58,7 @@ class CartSessionRepository
     }
 
     /**
-     * @param \App\Http\Models\Cart\CartModel $cartModel
+     * @param \App\Http\Transfers\Cart\CartModel $cartModel
      */
     private function calculateTotals(CartModel $cartModel): void
     {
@@ -87,7 +87,7 @@ class CartSessionRepository
     }
 
     /**
-     * @return \App\Http\Models\BaseModel|\App\Http\Models\Cart\CartModel
+     * @return \App\Http\Transfers\BaseModel|\App\Http\Transfers\Cart\CartModel
      */
     private function getDecodedCart(): CartModel
     {
